@@ -1,40 +1,46 @@
+# -----------------------------------------------------------------------------
+# Rainman Sián
+# 26-02-2020
+#
+# Ejemplo interprete sencillo con Python utilizando ply en Ubuntu
+# -----------------------------------------------------------------------------
 
 reservadas = {
-    'show':'show',
-    'databases':'databases',
-    'like':'like',
-    'select':'select',
-    'distinct':'distinct',
-    'from':'r_from',
-    'alter':'alter',
-    ' rename':'rename',
-    'to':'to',
-    'owner':'owner',
-    'table':'table',
-    'add':'add',
-    'column':'column',
-    'set':'set',
-    'not':'not',
-    'null':'null',
-    'check':'check',
-    'constraint':'constraint',
-    'unique':'unique',
-    'foreign':'foreign',
-    'key':'key',
-    'or':'or',
-    'replace':'replace',
-    'if':'if',
-    'exist':'exist',
-    'mode':'mode',
-    'inherits':'inherits',
-    'primary':'primary',
-    'references':'references',
-    'default':'default',
-    'type':'type',
-    'enum':'enum',
-    'drop':'drop',
-    'update':'update',
-    'where':'where',
+    'show': 'show',
+    'databases': 'databases',
+    'like': 'like',
+    'select': 'select',
+    'distinct': 'distinct',
+    'from': 'r_from',
+    'alter': 'alter',
+    ' rename': 'rename',
+    'to': 'to',
+    'owner': 'owner',
+    'table': 'table',
+    'add': 'add',
+    'column': 'column',
+    'set': 'set',
+    'not': 'not',
+    'null': 'null',
+    'check': 'check',
+    'constraint': 'constraint',
+    'unique': 'unique',
+    'foreign': 'foreign',
+    'key': 'key',
+    'or': 'or',
+    'replace': 'replace',
+    'if': 'if',
+    'exist': 'exist',
+    'mode': 'mode',
+    'inherits': 'inherits',
+    'primary': 'primary',
+    'references': 'references',
+    'default': 'default',
+    'type': 'type',
+    'enum': 'enum',
+    'drop': 'drop',
+    'update': 'update',
+    'where': 'where',
     'smallint': 'r_smallint',
     'integer': 'r_integer',
     'bigint': 'r_bigint',
@@ -53,86 +59,89 @@ reservadas = {
     'zone': 'zone',
     'date': 'r_date',
     'time': 'r_time',
-    'interval':'interval',
-    'boolean':'boolean',
-    'true':'true',
-    'false':'false',
-    'year':'year',
-    'month':'month',
-    'day':'day',
-    'hour':'hour',
-    'minute':'minute',
-    'second':'second',
-    'in':'in',
-    'like':'like',
-    'ilike':'ilike',
-    'similar':'similar',
-    'and':'and',
-    'or':'or',
-    'between':'between',
-    'symetric':'symetric',
-    'isnull':'isnull',
-    'notnull':'notnull',
-    'unknown':'unknown',
-    'insert':'insert',
-    'into':'into'
+    'interval': 'interval',
+    'boolean': 'boolean',
+    'true': 'true',
+    'false': 'false',
+    'year': 'year',
+    'month': 'month',
+    'day': 'day',
+    'hour': 'hour',
+    'minute': 'minute',
+    'second': 'second',
+    'in': 'in',
+    'like': 'like',
+    'ilike': 'ilike',
+    'similar': 'similar',
+    'and': 'and',
+    'or': 'or',
+    'between': 'between',
+    'symetric': 'symetric',
+    'isnull': 'isnull',
+    'notnull': 'notnull',
+    'unknown': 'unknown',
+    'insert': 'insert',
+    'into': 'into',
+    'values': 'values',
+    'group': 'group',
+    'by': 'by',
+    'having': 'having'
 }
 
 tokens = [
-            'mas'
-            'menos'
-            'elevado'
-            'multiplicacion'
-            'division'
-            'modulo'
-            'similar'
-            'menor'
-            'mayor'
-            'igual'
-            'menor_igual'
-            'mayor_igual'
-            'diferente1'
-            'diferente2'
-            'and'
-            'or'
-            'ptcoma'
-            'llavea'
-            'llavec'
-            'para'
-            'parac'
-            'dospuntos'
-            'coma'
-            'punto'
-            'int'
-            'decimal'
-            'varchar'
-            'char'
-            'id'
+             'mas',
+             'menos',
+             'elevado',
+             'multiplicacion',
+             'division',
+             'modulo',
+             'menor',
+             'mayor',
+             'igual',
+             'menor_igual',
+             'mayor_igual',
+             'diferente1',
+             'diferente2',
+             'ptcoma',
+             'llavea',
+             'llavec',
+             'para',
+             'parac',
+             'dospuntos',
+             'coma',
+             'punto',
+             'int',
+             'decimal',
+             'varchar',
+             'char',
+             'parc',
+             'simboloor',
+             'id'
          ] + list(reservadas.values())
 
-# Tokenst_mas = r'\+'
+# Tokens
+t_mas = r'\+'
 t_menos = r'-'
-t_elevado= r'^'
+t_elevado = r'\^'
 t_multiplicacion = r'\*'
-t_division =r'/'
-t_modulo= r'%'
-t_menor =r'<'
-t_mayor =r'>'
-t_igual =r'='
-t_menor_igual =r'<='
-t_mayor_igual =r'>='
-t_diferente1=r'<>'
-t_diferente2=r'!='
-t_simboloor=r'\|'
+t_division = r'/'
+t_modulo = r'%'
+t_menor = r'<'
+t_mayor = r'>'
+t_igual = r'='
+t_menor_igual = r'<='
+t_mayor_igual = r'>='
+t_diferente1 = r'<>'
+t_diferente2 = r'!='
+t_simboloor = r'\|'
 t_llavea = r'{'
 t_llavec = r'}'
 t_para = r'\('
 t_parc = r'\)'
-t_ptcoma =r';'
-t_dospuntos=r':'
-t_coma=r','
-t_punto=r'.'
-
+t_ptcoma = r';'
+t_dospuntos = r':'
+t_coma = r','
+t_punto = r'\.'
 
 
 def t_decimal(t):
@@ -157,7 +166,7 @@ def t_int(t):
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reservadas.get(t.value.lower(), 'id')  
+    t.type = reservadas.get(t.value.lower(), 'id')
     return t
 
 
@@ -199,20 +208,9 @@ import ply.lex as lex
 lexer = lex.lex()
 
 # Asociación de operadores y precedencia
-precedence = (
-    ('left', 'CONCAT'),
-    ('left', 'MAS', 'MENOS'),
-    ('left', 'POR', 'DIVIDIDO'),
-    ('right', 'UMENOS'),
-)
 
 
-
-
-
-
-
-#----------------------------------------------DEFINIMOS LA GRAMATICA------------------------------------------
+# ----------------------------------------------DEFINIMOS LA GRAMATICA------------------------------------------
 # Definición de la gramática
 
 from expresiones import *
@@ -236,39 +234,95 @@ def p_instrucciones_instruccion(t):
 
 
 def p_instruccion(t):
-    '''instruccion      : EXP'''
+    '''instruccion      : OPLOGICA
+                        | SELECT '''
     t[0] = t[1]
+
+
+def p_SELECT(t):
+    ''' SELECT : select distinct  LEXP from LFROM WHERE ptcoma
+	          | select  LEXP from LFROM WHERE ptcoma
+	'''
+
+
+def p_LFROM(t):
+    '''LFROM : LEXP
+	        |  para SELECT parc
+'''
+
+
+def p_WHERE(t):
+    ''' WHERE : where EXP
+                | where EXP GROUP
+	            | GROUP'''
+
+
+def p_GROUP(t):
+    ''' GROUP :  group by EXP HAVING
+	            | HAVING'''
+
+
+def p_HAVING(t):
+    ''' HAVING : having EXP
+	| '''
+
+
+def p_OPLOGICA(t):
+    '''OPLOGICA :  not RELACIONAL
+                 | OPLOGICA and RELACIONAL
+                 | OPLOGICA or RELACIONAL'''
+
+
+def p_RELACIONAL(t):
+    '''RELACIONAL : RELACIONAL mayor EXP
+                 | RELACIONAL menor EXP
+                 | RELACIONAL mayor_igual EXP
+                 | RELACIONAL menor_igual EXP
+                 | RELACIONAL igual EXP
+                 | RELACIONAL diferente1 EXP
+                 | RELACIONAL diferente2 EXP
+                 | EXP'''
+
+
+def p_LEXP(t):
+    '''LEXP : LEXP coma EXP
+	| EXP
+	| multiplicacion'''
 
 
 def p_EXP(t):
     '''EXP : EXP mas EXP1
-            |EXP menos EXP1
-            |EXP multiplicacion  EXP1
-            |EXP division EXP1
-            |EXP1'''
-    
+            | EXP menos EXP1
+            | EXP multiplicacion  EXP1
+            | EXP division EXP1
+            | EXP1'''
+
 
 def p_EXP1(t):
     '''EXP1 : EXP1 modulo EXP2
-             |EXP1 elevado EXP2
-             |EXP2'''
+             | EXP1 elevado EXP2
+             | EXP2'''
+
 
 def p_EXP2(t):
     '''EXP2 : para EXP parac
-              |UNARIO EXP
-              |int
-              |decimal
-              |varchar
-              |char
-              |true
-              |false
-              |id
-              |id punto EXP'''
-def p_EXP2(t):
-    '''UNARIOS:= not
-                |mas
-                |menos'''
-                
+              | UNARIO EXP
+              | int
+              | decimal
+              | varchar
+              | char
+              | true
+              | false
+              | id
+              | id punto EXP
+'''
+
+
+def p_UNARIO(t):
+    '''UNARIO : mas
+                | menos'''
+
+
 def p_error(t):
     print(t)
     print("Error sintáctico en '%s'" % t.value)
